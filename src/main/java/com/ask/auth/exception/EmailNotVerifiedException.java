@@ -1,14 +1,27 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
+import com.ask.auth.payload.ErrorCodes;
+
 public class EmailNotVerifiedException extends CustomException {
-    public EmailNotVerifiedException(String email) {
+    public EmailNotVerifiedException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-009",
-            "Email No Verificado",
-            "El email '" + email + "' no ha sido verificado.",
-            "https://docs.ask.com/errors/AUTH-009",
+            ErrorCodes.EMAIL_NOT_VERIFIED.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.EMAIL_NOT_VERIFIED.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.EMAIL_NOT_VERIFIED.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.EMAIL_NOT_VERIFIED.getUri(),
             HttpStatus.FORBIDDEN
         );
     }

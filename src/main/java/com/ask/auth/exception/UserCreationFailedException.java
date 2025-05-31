@@ -1,14 +1,27 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
+import com.ask.auth.payload.ErrorCodes;
+
 public class UserCreationFailedException extends CustomException {
-    public UserCreationFailedException(String reason) {
+    public UserCreationFailedException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-015",
-            "Error al Crear Usuario",
-            "No se pudo crear el usuario debido a: " + reason,
-            "https://docs.ask.com/errors/AUTH-015",
+            ErrorCodes.USER_CREATION_FAILED.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.USER_CREATION_FAILED.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.USER_CREATION_FAILED.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.USER_CREATION_FAILED.getUri(),
             HttpStatus.INTERNAL_SERVER_ERROR
         );
     }

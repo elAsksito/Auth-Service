@@ -1,15 +1,28 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
-public class InvalidPasswordException extends CustomException {
+import com.ask.auth.payload.ErrorCodes;
 
-    public InvalidPasswordException(String email) {
+public class InvalidPasswordException extends CustomException {
+    public InvalidPasswordException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-002", 
-            "Contraseña inválida", 
-            "La contraseña proporcionada para el usuario " + email + " es incorrecta.", 
-            "https://docs.ask.com/errors/AUTH-002", 
-            HttpStatus.UNAUTHORIZED);
+            ErrorCodes.INVALID_PASSWORD.getCode(), 
+            messageSource.getMessage(
+                ErrorCodes.INVALID_PASSWORD.getTitleKey(), 
+                null, 
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.INVALID_PASSWORD.getDescriptionKey(), 
+                null, 
+                locale
+            ),
+            ErrorCodes.INVALID_PASSWORD.getUri(), 
+            HttpStatus.UNAUTHORIZED
+        );
     }
 }

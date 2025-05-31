@@ -1,11 +1,13 @@
-package com.ask.auth.exception;
+package com.ask.auth.payload;
+
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class Error {
+public class ApiError {
     private String errorCode;
     private String errorTitle;
     private String errorDescription;
@@ -14,4 +16,5 @@ public class Error {
     private String errorStatus;
     private String errorTimestamp;
     private int httpStatus;
+    private Map<String, String> extraData;
 }

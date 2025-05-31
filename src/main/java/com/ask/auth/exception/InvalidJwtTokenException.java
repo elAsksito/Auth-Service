@@ -1,15 +1,27 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
-public class InvalidJwtTokenException extends CustomException {
+import com.ask.auth.payload.ErrorCodes;
 
-    public InvalidJwtTokenException(String token) {
+public class InvalidJwtTokenException extends CustomException {
+    public InvalidJwtTokenException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-005",
-            "Token JWT Inválido",
-            "El token JWT proporcionado es inválido o ha expirado.",
-            "https://docs.ask.com/errors/AUTH-005",
+            ErrorCodes.INVALID_JWT_TOKEN.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.INVALID_JWT_TOKEN.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.INVALID_JWT_TOKEN.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.INVALID_JWT_TOKEN.getUri(),
             HttpStatus.UNAUTHORIZED
         );
     }

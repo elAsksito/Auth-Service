@@ -1,14 +1,28 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
-public class UserNotFoundException extends CustomException{
+import com.ask.auth.payload.ErrorCodes;
 
-    public UserNotFoundException(String email) {
-        super("AUTH-001", 
-        "Usuario no encontrado", 
-        "El usuario " + email + " no existe en el sistema.", 
-        "https://docs.ask.com/errors/AUTH-001", HttpStatus.NOT_FOUND);
+public class UserNotFoundException extends CustomException{
+    public UserNotFoundException(MessageSource messageSource, Locale locale) {
+        super(
+            ErrorCodes.USER_NOT_FOUND.getCode(), 
+            messageSource.getMessage(
+                ErrorCodes.USER_NOT_FOUND.getTitleKey(), 
+                null, 
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.USER_NOT_FOUND.getDescriptionKey(), 
+                null, 
+                locale
+            ),
+            ErrorCodes.USER_NOT_FOUND.getUri(), 
+            HttpStatus.NOT_FOUND
+        );
     }
-    
 }

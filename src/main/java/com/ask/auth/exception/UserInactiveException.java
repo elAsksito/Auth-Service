@@ -1,14 +1,27 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
+import com.ask.auth.payload.ErrorCodes;
+
 public class UserInactiveException extends CustomException {
-    public UserInactiveException(String email) {
+    public UserInactiveException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-012",
-            "Usuario Inactivo",
-            "El usuario '" + email + "' está inactivo. Contacta al administrador.",
-            "https://docs.ask.com/errors/AUTH-012",
+            ErrorCodes.USER_INACTIVE.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.USER_INACTIVE.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.USER_INACTIVE.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.USER_INACTIVE.getUri(),
             HttpStatus.FORBIDDEN
         );
     }

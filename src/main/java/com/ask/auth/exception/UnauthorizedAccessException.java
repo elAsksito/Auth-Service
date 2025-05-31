@@ -1,15 +1,28 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+
+import com.ask.auth.payload.ErrorCodes;
 
 public class UnauthorizedAccessException extends CustomException {
 
-    public UnauthorizedAccessException() {
+    public UnauthorizedAccessException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-006",
-            "Acceso No Autorizado",
-            "No tienes permisos suficientes para realizar esta acción.",
-            "https://docs.ask.com/errors/AUTH-006",
+            ErrorCodes.UNAUTHORIZED_ACCESS.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.UNAUTHORIZED_ACCESS.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.UNAUTHORIZED_ACCESS.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.UNAUTHORIZED_ACCESS.getUri(),
             HttpStatus.UNAUTHORIZED
         );
     }

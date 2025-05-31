@@ -1,17 +1,28 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
-public class UserAlreadyExistsException extends CustomException {
+import com.ask.auth.payload.ErrorCodes;
 
-    public UserAlreadyExistsException(String email) {
+public class UserAlreadyExistsException extends CustomException {
+    public UserAlreadyExistsException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-008",
-            "Usuario ya existe",
-            "El usuario con el correo electrónico " + email + " ya está registrado.",
-            "https://docs.ask.com/errors/AUTH-008",
+            ErrorCodes.USER_ALREADY_EXISTS.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.USER_ALREADY_EXISTS.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.USER_ALREADY_EXISTS.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.USER_ALREADY_EXISTS.getUri(),
             HttpStatus.CONFLICT
         );
     }
-    
 }

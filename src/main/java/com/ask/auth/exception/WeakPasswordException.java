@@ -1,14 +1,27 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 
+import com.ask.auth.payload.ErrorCodes;
+
 public class WeakPasswordException extends CustomException {
-    public WeakPasswordException() {
+    public WeakPasswordException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-016",
-            "Contraseña Débil",
-            "La contraseña no cumple con los requisitos mínimos de seguridad.",
-            "https://docs.ask.com/errors/AUTH-016",
+            ErrorCodes.WEAK_PASSWORD.getCode(),
+            messageSource.getMessage(
+                ErrorCodes.WEAK_PASSWORD.getTitleKey(),
+                null,
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.WEAK_PASSWORD.getDescriptionKey(),
+                null,
+                locale
+            ),
+            ErrorCodes.WEAK_PASSWORD.getUri(),
             HttpStatus.BAD_REQUEST
         );
     }

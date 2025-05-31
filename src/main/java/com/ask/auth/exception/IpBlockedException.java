@@ -1,15 +1,28 @@
 package com.ask.auth.exception;
 
+import java.util.Locale;
+
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+
+import com.ask.auth.payload.ErrorCodes;
 
 public class IpBlockedException extends CustomException {
 
-    public IpBlockedException(String ipAddress) {
+    public IpBlockedException(MessageSource messageSource, Locale locale) {
         super(
-            "AUTH-004", 
-            "IP Bloqueada", 
-            "La dirección IP " + ipAddress + " ha sido bloqueada por múltiples intentos fallidos de inicio de sesión.", 
-            "https://docs.ask.com/errors/AUTH-004", 
+            ErrorCodes.IP_BLOCKED.getCode(), 
+            messageSource.getMessage(
+                ErrorCodes.IP_BLOCKED.getTitleKey(), 
+                null, 
+                locale
+            ),
+            messageSource.getMessage(
+                ErrorCodes.IP_BLOCKED.getDescriptionKey(), 
+                null, 
+                locale
+            ),
+            ErrorCodes.IP_BLOCKED.getUri(), 
             HttpStatus.FORBIDDEN);
     }
 }
