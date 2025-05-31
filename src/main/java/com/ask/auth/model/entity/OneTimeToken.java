@@ -28,8 +28,9 @@ public class OneTimeToken {
 	@Column(name = "token_type", nullable = false, length = 30)
 	private OneTokenType tokenType;
 
+	@Builder.Default
 	@Column(name = "is_used", nullable = false)
-	private Boolean isUsed = false;
+	private boolean isUsed = false;
 
 	@Column(name = "used_at")
 	private Instant usedAt;

@@ -25,19 +25,23 @@ public class User {
 	@Column(length = 255, nullable = false)
 	private String password;
 
+	@Builder.Default
 	@Column(name = "is_email_verified", nullable = false)
 	private boolean isEmailVerified = false;
 
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	@Column(length = 8, nullable = false, columnDefinition = "ENUM('ACTIVE', 'BANNED', 'INACTIVE') DEFAULT 'ACTIVE'")
 	private Status status = Status.ACTIVE;
 
+	@Builder.Default
 	@Column(name = "failed_login_attempts", nullable = false)
 	private int failedLoginAttempts = 0;
 
 	@Column(name = "lock_until")
 	private LocalDateTime lockUntil;
 
+	@Builder.Default
 	@Column(name = "two_fa_enabled", nullable = false)
 	private boolean twoFaEnabled = false;
 
@@ -60,6 +64,7 @@ public class User {
 	@Column(name = "password_last_changed")
 	private LocalDateTime passwordLastChanged;
 
+	@Builder.Default
 	@Column(name = "must_change_password", nullable = false)
 	private boolean mustChangePassword = false;
 

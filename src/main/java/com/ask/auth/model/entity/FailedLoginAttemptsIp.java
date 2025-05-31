@@ -13,8 +13,9 @@ public class FailedLoginAttemptsIp {
 	@Column(name = "ip_address", length = 45)
 	private String ipAddress;
 
+	@Builder.Default
 	@Column(nullable = false)
-	private Integer attempts = 0;
+	private int attempts = 0;
 
 	@Column(name = "last_attempt")
 	private Instant lastAttempt;

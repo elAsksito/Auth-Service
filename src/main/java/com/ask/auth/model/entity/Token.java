@@ -25,6 +25,7 @@ public class Token {
 	@Column(name = "token_hash", nullable = false, length = 512)
 	private byte[] tokenHash;
 
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	@Column(name = "token_type", nullable = false, length = 10)
 	private TokenType tokenType = TokenType.REFRESH;
@@ -35,8 +36,9 @@ public class Token {
 	@Column(name = "ip_address", length = 45)
 	private String ipAddress;
 
+	@Builder.Default
 	@Column(name = "is_revoked", nullable = false)
-	private Boolean isRevoked = false;
+	private boolean isRevoked = false;
 
 	@Column(name = "revoked_at")
 	private Instant revokedAt;

@@ -31,5 +31,4 @@ public class PasswordHistory {
 			changedAt = Instant.now();
 		}
 	}
-
 }

@@ -32,6 +32,7 @@ public class SuspiciousActivity {
 	@Column(columnDefinition = "TEXT")
 	private String reason;
 
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10, nullable = false)
 	private Severity severity = Severity.MEDIUM;
