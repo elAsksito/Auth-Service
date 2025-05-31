@@ -37,5 +37,4 @@ public class AuditLog {
 		if (createdAt == null)
 			createdAt = Instant.now();
 	}
-
 }
