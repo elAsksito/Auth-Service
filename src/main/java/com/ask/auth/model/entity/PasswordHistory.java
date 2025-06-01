@@ -1,0 +1,40 @@
+package com.ask.auth.model.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.Instant;
+
+import org.hibernate.annotations.UuidGenerator;
+
+@Entity
+@Table(name = "password_history", indexes = {
+		@Index(name = "idx_password_history_user", columnList = "user_id, changed_at") })
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PasswordHistory {
+
+	@Id
+	@Column(length = 36)
+	@GeneratedValue(generator = "UUID")
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
+	private String id;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_password_history_user"))
+	private User user;
+
+	@Column(name = "password_hash", nullable = false, length = 255)
+	private String passwordHash;
+
+	@Column(name = "changed_at", nullable = false)
+	private Instant changedAt;
+
+	@PrePersist
+	public void prePersist() {
+		if (changedAt == null) {
+			changedAt = Instant.now();
+		}
+	}
+}
