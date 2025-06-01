@@ -8,6 +8,8 @@ import java.time.Instant;
 @Table(name = "login_events", indexes = { @Index(name = "idx_login_user_time", columnList = "user_id, timestamp") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginEvent {
 
 	@Id

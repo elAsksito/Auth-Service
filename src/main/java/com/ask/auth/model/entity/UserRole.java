@@ -3,13 +3,17 @@ package com.ask.auth.model.entity;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_roles")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @IdClass(UserRoleId.class)
 public class UserRole {
 	@Id

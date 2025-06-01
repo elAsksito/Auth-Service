@@ -1,4 +1,4 @@
-package com.ask.auth.payload;
+package com.ask.auth.payload.response;
 
 import java.time.ZonedDateTime;
 

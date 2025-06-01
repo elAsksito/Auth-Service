@@ -11,6 +11,8 @@ import com.ask.auth.model.enums.OneTokenType;
 		@Index(name = "idx_ott_user_type_used", columnList = "user_id, token_type, is_used") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OneTimeToken {
 
 	@Id

@@ -8,6 +8,8 @@ import java.time.Instant;
 @Table(name = "ip_blocks")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class IpBlock {
 
 	@Id

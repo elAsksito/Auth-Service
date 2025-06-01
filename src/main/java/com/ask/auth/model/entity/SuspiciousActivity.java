@@ -11,13 +11,15 @@ import com.ask.auth.model.enums.Severity;
 		@Index(name = "idx_suspicious_user_time", columnList = "user_id, timestamp") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SuspiciousActivity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_suspicious_user"))
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_suspicious_user"), nullable = true)
 	private User user;
 
 	@Column(name = "ip_address", length = 45)

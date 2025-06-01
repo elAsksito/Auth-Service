@@ -4,15 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+import org.hibernate.annotations.UuidGenerator;
+
 @Entity
 @Table(name = "password_history", indexes = {
 		@Index(name = "idx_password_history_user", columnList = "user_id, changed_at") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PasswordHistory {
 
 	@Id
 	@Column(length = 36)
+	@GeneratedValue(generator = "UUID")
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
 	private String id;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

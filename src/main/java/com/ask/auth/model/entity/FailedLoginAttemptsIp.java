@@ -8,6 +8,8 @@ import java.time.Instant;
 @Table(name = "failed_login_attempts_ip")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FailedLoginAttemptsIp {
 	@Id
 	@Column(name = "ip_address", length = 45)

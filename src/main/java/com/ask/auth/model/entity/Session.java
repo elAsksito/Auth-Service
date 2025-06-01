@@ -9,6 +9,8 @@ import java.time.Instant;
 		@Index(name = "idx_session_revoked", columnList = "is_revoked") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Session {
 
 	@Id

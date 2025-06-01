@@ -4,21 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+import com.ask.auth.model.enums.Action;
+
 @Entity
 @Table(name = "audit_logs", indexes = { @Index(name = "idx_audit_user_time", columnList = "user_id, created_at") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuditLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_audit_user"))
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_audit_user"), nullable = true)
 	private User user;
 
-	@Column(length = 100, nullable = false)
-	private String action;
+	@Enumerated(EnumType.STRING)
+	private Action action;
 
 	@Column(columnDefinition = "json")
 	private String metadata;

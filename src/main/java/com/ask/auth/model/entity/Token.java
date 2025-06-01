@@ -2,20 +2,28 @@ package com.ask.auth.model.entity;
 
 import java.time.Instant;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import com.ask.auth.model.enums.TokenType;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tokens", indexes = { @Index(name = "idx_user_expiration", columnList = "user_id, expires_at"),
 		@Index(name = "idx_token_revoked", columnList = "is_revoked") })
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Token {
 	@Id
 	@Column(length = 36)
+	@GeneratedValue(generator = "UUID")
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
 	private String id;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -25,10 +33,9 @@ public class Token {
 	@Column(name = "token_hash", nullable = false, length = 512)
 	private byte[] tokenHash;
 
-	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	@Column(name = "token_type", nullable = false, length = 10)
-	private TokenType tokenType = TokenType.REFRESH;
+	private TokenType tokenType;
 
 	@Column(name = "user_agent", length = 512)
 	private String userAgent;

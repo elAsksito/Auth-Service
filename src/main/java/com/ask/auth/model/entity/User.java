@@ -3,20 +3,30 @@ package com.ask.auth.model.entity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import com.ask.auth.model.enums.Status;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
 	@Id
 	@Column(length = 36)
+	@GeneratedValue(generator = "UUID")
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
 	private String id;
 
 	@Column(length = 150, nullable = false, unique = true)
